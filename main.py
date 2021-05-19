@@ -399,9 +399,10 @@ class Game:
     # similar to min max algorithm
     def play_hard_aux(self):
         if self.check_win():
-            if self.my_holes.get_hole_by_number(-1, 1).numOfStones \
-                    > self.my_holes.get_hole_by_number(-2, 1).numOfStones:
+            if self.my_holes.get_hole_by_number(-1, 1).numOfStones > self.my_holes.get_hole_by_number(-2, 1).numOfStones:
                 return 1
+            else:
+                return 0
 
         for hole_index in range(1, 7):
             tmpGame = self.copy()
@@ -412,7 +413,7 @@ class Game:
             tmpGame.play_best_for_2()
             if tmpGame.play_hard_aux() is not None:
                 return hole_index
-            return None
+        return None
 
     def play_hard(self):
         holeIndex = self.play_hard_aux()
